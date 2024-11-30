@@ -11,7 +11,7 @@ var last_click = 0
 var number_of_clicks = 0 
 var start_clicking_time = 0
 var playerMode : PLAYER_MODES = PLAYER_MODES.IDLE
-const MOVEMENT_RADIUS : float = 5.0
+const MOVEMENT_RADIUS : float = 20.0
 var angle : float = 0.0
 
 var is_handling_input = true
@@ -52,7 +52,7 @@ func handle_action(ui_mode_en = false):
 			velocity=  Vector3(cos((angle))* MOVEMENT_RADIUS,0,sin((angle))*MOVEMENT_RADIUS)
 			#print(global_position)
 			move_and_slide()
-			print("moving in a circle")
+			$AnimationPlayer.play("moving")
 			#start moving in a circle 
 			pass
 		
@@ -108,6 +108,7 @@ func handle_clicks():
 	
 
 func _physics_process(delta):
+	get_parent().get_node("Camera3D").look_at(global_position)
 	angle +=delta
 	
 	
@@ -138,6 +139,8 @@ func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shap
 
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:
+		"moving":
+			$AnimationPlayer.play("idle")
 		"punch":
 			$AnimationPlayer.play("idle")
 			playerMode = PLAYER_MODES.IDLE
