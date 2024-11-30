@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx6wqqvsfo1je"]
+[gd_scene load_steps=10 format=3 uid="uid://bx6wqqvsfo1je"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_di82q"]
 
@@ -15,12 +15,18 @@ resource_name = "jump"
 [sub_resource type="Animation" id="Animation_xcmx2"]
 resource_name = "finisher"
 
+[sub_resource type="Animation" id="Animation_snuvu"]
+resource_name = "idle"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxra7"]
 _data = {
 "finisher": SubResource("Animation_xcmx2"),
+"idle": SubResource("Animation_snuvu"),
 "jump": SubResource("Animation_hg1o3"),
 "punch": SubResource("Animation_a7c3r")
 }
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b01bv"]
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_di82q")
@@ -35,3 +41,13 @@ shape = SubResource("BoxShape3D_chjmw")
 libraries = {
 "": SubResource("AnimationLibrary_oxra7")
 }
+
+[node name="hand" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hand"]
+shape = SubResource("CapsuleShape3D_b01bv")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_shape_entered" from="hand" to="." method="_on_hand_body_shape_entered"]
