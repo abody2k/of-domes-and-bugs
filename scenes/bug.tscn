@@ -43,3 +43,5 @@ collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="attackingZone"]
 shape = SubResource("SphereShape3D_sbdr0")
+
+[connection signal="body_shape_entered" from="attackingZone" to="." method="_on_attacking_zone_body_shape_entered"]
