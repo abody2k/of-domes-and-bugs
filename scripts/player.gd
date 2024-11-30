@@ -11,6 +11,8 @@ var last_click = 0
 var number_of_clicks = 0 
 var start_clicking_time = 0
 var playerMode : PLAYER_MODES = PLAYER_MODES.IDLE
+const MOVEMENT_RADIUS : float = 5.0
+var angle : float = 0.0
 
 var is_handling_input = true
 
@@ -45,6 +47,11 @@ func handle_action(ui_mode_en = false):
 		else:
 			if ui_mode_en:
 				return
+			
+
+			velocity=  Vector3(cos((angle))* MOVEMENT_RADIUS,0,sin((angle))*MOVEMENT_RADIUS)
+			#print(global_position)
+			move_and_slide()
 			print("moving in a circle")
 			#start moving in a circle 
 			pass
@@ -79,7 +86,7 @@ func handle_action(ui_mode_en = false):
 			print("number of clicks " + str(number_of_clicks))
 			
 func take_damage(damage:int ):
-	hp-=1
+	hp-=damage
 	if hp <=0:
 		
 		$AnimationPlayer.play("death")
@@ -101,6 +108,8 @@ func handle_clicks():
 	
 
 func _physics_process(delta):
+	angle +=delta
+	
 	
 	if ui_mode:
 		handle_action(true)
@@ -111,9 +120,10 @@ func _physics_process(delta):
 		handle_action()
 
 
-func _on_hand_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	
 	if playerMode == PLAYER_MODES.ATTACKING:
+		body.call("got_attacked")
 		#call a function in that body that will play certain animation
 		#reduce hp
 		#stop the animation of this player

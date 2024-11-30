@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://c75wiero8a5qq"]
+[gd_scene load_steps=3 format=3 uid="uid://c75wiero8a5qq"]
+
+[ext_resource type="PackedScene" uid="uid://bx6wqqvsfo1je" path="res://scenes/player.tscn" id="1_0cv8p"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tbxmp"]
 
 [node name="main" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_0cv8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24132, 0, -0.822356)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_tbxmp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.838185, 0.545385, 0, -0.545385, 0.838185, 0, 4.991, 11.314)
