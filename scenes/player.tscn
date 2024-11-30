@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bx6wqqvsfo1je"]
+[gd_scene load_steps=11 format=3 uid="uid://bx6wqqvsfo1je"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_di82q"]
 
@@ -18,8 +18,12 @@ resource_name = "finisher"
 [sub_resource type="Animation" id="Animation_snuvu"]
 resource_name = "idle"
 
+[sub_resource type="Animation" id="Animation_1at04"]
+resource_name = "death"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxra7"]
 _data = {
+"death": SubResource("Animation_1at04"),
 "finisher": SubResource("Animation_xcmx2"),
 "idle": SubResource("Animation_snuvu"),
 "jump": SubResource("Animation_hg1o3"),
@@ -49,5 +53,44 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hand"]
 shape = SubResource("CapsuleShape3D_b01bv")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="playagain" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.476
+anchor_right = 0.135
+anchor_bottom = 0.524
+offset_top = 0.052002
+offset_right = 0.479996
+offset_bottom = -0.0520325
+grow_vertical = 2
+text = "Play again? (1 click)"
+
+[node name="exit" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.841
+anchor_top = 0.476
+anchor_right = 1.0
+anchor_bottom = 0.524
+offset_left = 0.167969
+offset_top = 0.052002
+offset_bottom = -0.0520325
+grow_horizontal = 0
+grow_vertical = 2
+text = "Exit the game (2 clicks)"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_shape_entered" from="hand" to="." method="_on_hand_body_shape_entered"]
+[connection signal="button_down" from="CanvasLayer/Control/playagain" to="." method="_on_playagain_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/exit" to="." method="_on_exit_button_down"]
