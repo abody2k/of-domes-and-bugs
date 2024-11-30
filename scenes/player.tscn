@@ -1,10 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx6wqqvsfo1je"]
+[gd_scene load_steps=8 format=3 uid="uid://bx6wqqvsfo1je"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_di82q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v6p6a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chjmw"]
+
+[sub_resource type="Animation" id="Animation_a7c3r"]
+resource_name = "punch"
+
+[sub_resource type="Animation" id="Animation_hg1o3"]
+resource_name = "jump"
+
+[sub_resource type="Animation" id="Animation_xcmx2"]
+resource_name = "finisher"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oxra7"]
+_data = {
+"finisher": SubResource("Animation_xcmx2"),
+"jump": SubResource("Animation_hg1o3"),
+"punch": SubResource("Animation_a7c3r")
+}
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_di82q")
@@ -14,3 +30,8 @@ mesh = SubResource("BoxMesh_v6p6a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_chjmw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oxra7")
+}
