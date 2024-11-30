@@ -1,13 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgoxg3gxovybq"]
+[gd_scene load_steps=9 format=3 uid="uid://dgoxg3gxovybq"]
+
+[ext_resource type="Script" path="res://scripts/bug.gd" id="1_hqt15"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fw6bs"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qx43m"]
 
+[sub_resource type="Animation" id="Animation_m0lyv"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_33he6"]
+resource_name = "attack_below"
+
+[sub_resource type="Animation" id="Animation_nc20j"]
+resource_name = "attack_top"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7sqt"]
+_data = {
+"attack_below": SubResource("Animation_33he6"),
+"attack_top": SubResource("Animation_nc20j"),
+"idle": SubResource("Animation_m0lyv")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sbdr0"]
+
 [node name="bug" type="CharacterBody3D"]
+script = ExtResource("1_hqt15")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fw6bs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_qx43m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x7sqt")
+}
+
+[node name="attackingZone" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="attackingZone"]
+shape = SubResource("SphereShape3D_sbdr0")
