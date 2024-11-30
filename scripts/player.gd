@@ -44,7 +44,7 @@ func handle_action(ui_mode_en = false):
 			#play the animation and all
 			#reset the number of clicks
 			#resume the process again
-		else:
+		elif Time.get_ticks_msec() - start_clicking_time >= 200:
 			if ui_mode_en:
 				return
 			
@@ -55,25 +55,25 @@ func handle_action(ui_mode_en = false):
 			print("moving in a circle")
 			#start moving in a circle 
 			pass
-		pass
 		
-		
-		
-		
-		
+
 		
 	if Input.is_action_just_released("action"):
 		var time_diff = Time.get_ticks_msec()-last_click
+		print(time_diff)
 		if time_diff <= 200 :
-			if number_of_clicks > 2:
+			if number_of_clicks >= 2:
 				number_of_clicks = 0
+				$Control/clicks.text = "0"
 			else:
 				number_of_clicks+=1
+				$Control/clicks.text = str(number_of_clicks)
 			
 			pass
 			#it is an additional click
 		else:
 			number_of_clicks = 0
+			$Control/clicks.text = "0"
 		pass
 		
 	
@@ -128,6 +128,10 @@ func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shap
 		#reduce hp
 		#stop the animation of this player
 		$AnimationPlayer.play("idle")
+		playerMode = PLAYER_MODES.IDLE
+		is_handling_input= true
+		number_of_clicks=0
+		$Control/clicks.text = "0"
 		pass
 	pass # Replace with function body.
 
@@ -139,6 +143,7 @@ func _on_animation_player_animation_finished(anim_name):
 			playerMode = PLAYER_MODES.IDLE
 			is_handling_input= true
 			number_of_clicks=0
+			$Control/clicks.text = "0"
 		"death":
 			ui_mode= true
 			$CanvasLayer.visible = true
