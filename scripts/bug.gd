@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
 enum STATES {IDLE,ATTACKING,AVOIDING}
-const SPEED = 5.0
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
-var hp = 10
+var hp = 50
 var player  : CharacterBody3D
 @export var state : STATES = STATES.IDLE
 var dead = false
@@ -12,6 +12,9 @@ var dead = false
 func _ready():
 	player = get_parent().get_node("player")
 	$AnimationPlayer.play("idle")
+	
+	
+	
 func got_attacked():
 	hp-=1
 	get_parent().get_node("CanvasLayer/Control/bug").value = hp
@@ -21,14 +24,17 @@ func got_attacked():
 		$Timer.stop()
 		set_physics_process(false)
 	elif hp ==1:
-		(get_parent().get_node("AudioStreamPlayer") as AudioStreamPlayer).volume_db+=5
+		(get_parent().get_node("AudioStreamPlayer") as AudioStreamPlayer).volume_db+=10
 		
 	return
 
 func _physics_process(_delta):
 	if global_position != Vector3(player.global_position.x,global_position.y,player.global_position.z):
 		look_at(Vector3(player.global_position.x,global_position.y,player.global_position.z))
-	
+	if state == STATES.IDLE and global_position.distance_squared_to(player.global_position) > 500 :
+		velocity = -basis.z * SPEED
+		move_and_slide()
+		print("moving")
 	pass
 
 
@@ -49,8 +55,7 @@ func player_about_to_attack():
 
 func attack():
 	print("trying")
-	if randf() > .5 :
-		print("avoiding success")
+	if randf() > .5 and global_position.distance_squared_to(player.global_position) <= 200:
 		state = STATES.AVOIDING
 		$wing.play()
 		$AnimationPlayer.play("avoid")
@@ -73,6 +78,10 @@ func make_it_go_backward():
 func _on_timer_timeout():
 	if dead:
 		return
+		
+	if global_position.distance_squared_to(player.global_position) > 500:
+			state = STATES.IDLE
+			return
 	#The bug either stays idle or it attacks depending on a random value
 	if randf() > .5 and state == STATES.IDLE:# we can alter this later to provide an attack while jumping
 		state =  STATES.ATTACKING
@@ -83,7 +92,7 @@ func _on_timer_timeout():
 		
 		
 		pass #ATTACK
-	elif state == STATES.ATTACKING:
+	elif state == STATES.ATTACKING and !$AnimationPlayer.is_playing():
 		state = STATES.IDLE
 		$AnimationPlayer.play("idle")
 		#DO NOTHING

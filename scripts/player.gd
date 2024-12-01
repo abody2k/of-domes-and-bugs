@@ -11,12 +11,13 @@ var last_click = 0
 var number_of_clicks = 0 
 var start_clicking_time = 0
 var playerMode : PLAYER_MODES = PLAYER_MODES.IDLE
-const MOVEMENT_RADIUS : float = 15.0
+const MOVEMENT_RADIUS : float = 20.0
 var angle : float = 0.0
 
 var is_handling_input = true
 var bug : CharacterBody3D
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	bug = get_parent().get_node("bug")
 	last_click= Time.get_ticks_msec()
 	get_parent().get_node("AnimationPlayer").play("main")
@@ -46,7 +47,7 @@ func handle_action(delta:float,ui_mode_en = false):
 			if ui_mode_en:
 				return
 			
-			angle +=delta
+			#angle +=delta
 			velocity=  Vector3(cos((angle))* MOVEMENT_RADIUS,0,sin((angle))*MOVEMENT_RADIUS)
 
 			move_and_slide()
@@ -101,7 +102,7 @@ func take_damage(damage:int ):
 		
 		$AnimationPlayer.play("death")
 	elif hp ==1:
-		(get_parent().get_node("AudioStreamPlayer") as AudioStreamPlayer).volume_db+=5
+		(get_parent().get_node("AudioStreamPlayer") as AudioStreamPlayer).volume_db+=10
 		pass
 	pass
 	
@@ -136,6 +137,7 @@ func bring_player_to_ground():
 	
 	
 func _physics_process(delta):
+	angle +=delta
 	if global_position != Vector3(bug.global_position.x,global_position.y,bug.global_position.z):
 		look_at(Vector3(bug.global_position.x,global_position.y,bug.global_position.z))
 	get_parent().get_node("Camera3D").look_at(global_position)
@@ -180,6 +182,7 @@ func _on_animation_player_animation_finished(anim_name):
 			$AudioStreamPlayer.play()
 		"death":
 			ui_mode= true
+			$AudioStreamPlayer2.play()
 			$CanvasLayer.visible = true
 			pass
 	pass # Replace with function body.
@@ -192,4 +195,9 @@ func _on_playagain_button_down():
 
 func _on_exit_button_down():
 	get_tree().quit()
+	pass # Replace with function body.
+
+
+func _on_audio_stream_player_finished():
+	get_parent().get_node("AudioStreamPlayer").play()
 	pass # Replace with function body.
