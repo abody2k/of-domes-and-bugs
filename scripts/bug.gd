@@ -6,13 +6,20 @@ const JUMP_VELOCITY = 4.5
 var hp = 10
 var player  : CharacterBody3D
 var state : STATES = STATES.IDLE
-
+var dead = false
 
 
 func _ready():
 	player = get_parent().get_node("player")
+	$AnimationPlayer.play("idle")
 func got_attacked():
 	hp-=1
+	if hp <= 0:
+		dead=true
+		$AnimationPlayer.play("death")
+		$Timer.stop()
+		set_physics_process(false)
+		
 	return
 
 func _physics_process(_delta):
@@ -39,7 +46,7 @@ func player_about_to_attack():
 func attack():
 	print("trying")
 	if randf() > .5 :
-		print("success")
+		print("avoiding success")
 		state = STATES.AVOIDING
 		$AnimationPlayer.play("avoid")
 	pass
@@ -59,8 +66,10 @@ func make_it_go_backward():
 	pass
 	
 func _on_timer_timeout():
+	if dead:
+		return
 	#The bug either stays idle or it attacks depending on a random value
-	if randf() > .5 and state != STATES.AVOIDING and state != STATES.ATTACKING :# we can alter this later to provide an attack while jumping
+	if randf() > .5 and state == STATES.IDLE:# we can alter this later to provide an attack while jumping
 		state =  STATES.ATTACKING
 		$AnimationPlayer.play("attack_below")
 		var temp_tween = get_tree().create_tween()
@@ -69,7 +78,7 @@ func _on_timer_timeout():
 		
 		
 		pass #ATTACK
-	else:
+	elif state == STATES.ATTACKING:
 		state = STATES.IDLE
 		$AnimationPlayer.play("idle")
 		#DO NOTHING
@@ -85,3 +94,5 @@ func _on_animation_player_animation_finished(anim_name):
 		"avoid":
 			state = STATES.IDLE
 			$AnimationPlayer.play("idle")
+		"death":
+			player.call("_on_animation_player_animation_finished","death")
