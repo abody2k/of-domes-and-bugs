@@ -114,6 +114,7 @@ size = Vector3(138.759, 7.2373, 92.6572)
 size = Vector3(132.749, 53.8269, 4.7157)
 
 [node name="Arena" type="StaticBody3D"]
+collision_layer = 32
 
 [node name="Cube_003" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.7447, -19.6606, 42.9571)
