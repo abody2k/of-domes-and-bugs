@@ -1,6 +1,10 @@
-[gd_scene load_steps=17 format=4 uid="uid://bx6wqqvsfo1je"]
+[gd_scene load_steps=21 format=4 uid="uid://bx6wqqvsfo1je"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_di82q"]
+[ext_resource type="AudioStream" uid="uid://i8lspep0oovt" path="res://audio/jump-sound-14839.wav" id="2_4k0wh"]
+[ext_resource type="Texture2D" uid="uid://ddpftadcln6di" path="res://images/fist.png" id="2_mw8xh"]
+[ext_resource type="Texture2D" uid="uid://cbyw5swa4th84" path="res://images/jump.png" id="3_k5scu"]
+[ext_resource type="AudioStream" uid="uid://v6p6nbwjto7y" path="res://audio/hard-punch-90179.mp3" id="3_wwphx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_85gbw"]
 radius = 3.249
@@ -332,6 +336,33 @@ tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0
 
 [sub_resource type="Animation" id="Animation_xcmx2"]
 resource_name = "finisher"
+length = 10.0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton3D:Bone.009.L")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.17375e-07, -2.23757e-08, 0.610779, 0.791801, 0.5, 1, -0.204933, -0.158081, 0.589967, 0.764821, 0.8, 1, 0.204933, 0.158081, 0.589967, 0.764821, 1, 1, 1.34431e-07, -1.83119e-08, 0.610779, 0.791801)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D:Bone.009.R")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1.17375e-07, 2.23757e-08, -0.610779, 0.791801, 0.5, 1, 0.204933, -0.158081, -0.589967, 0.764821, 0.8, 1, -0.204933, 0.158081, -0.589967, 0.764821, 1, 1, 1.27885e-07, 8.30164e-08, -0.610779, 0.791801)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_snuvu"]
 resource_name = "idle"
@@ -525,6 +556,18 @@ tracks/2/path = NodePath("Skeleton3D:Bone.009.R")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 1.17375e-07, 2.23757e-08, -0.610779, 0.791801, 0.166667, 1, 7.10533e-08, 2.76382e-08, -0.385034, 0.922902, 0.8, 1, 1.17375e-07, 2.23757e-08, -0.610779, 0.791801)
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("jump:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_34jbl"]
 resource_name = "moving"
@@ -849,6 +892,18 @@ tracks/21/keys = {
 "update": 0,
 "values": [Vector3(1.83332, 2.43706, 0.920799), Vector3(3.8734, 10.2748, 5.42813), Vector3(1.92391, 6.30588, -4.92069), Vector3(-0.139012, 5.73888, -5.60601), Vector3(-6.92971, 5.73888, -3.75964), Vector3(-9.2036, 5.73888, 4.06577)]
 }
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("punch:playing")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxra7"]
 _data = {
@@ -1069,14 +1124,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="clicks" type="RichTextLabel" parent="Control"]
+[node name="punch" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.035
-anchor_bottom = 0.062
-offset_right = -0.32
-offset_bottom = -0.176003
-text = "0"
+anchor_right = 0.089
+anchor_bottom = 0.158
+offset_right = 409.472
+offset_bottom = 409.616
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mw8xh")
+
+[node name="jump" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.089
+anchor_bottom = 0.158
+offset_right = 409.472
+offset_bottom = 409.616
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_k5scu")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 bones/0/name = "Bone"
@@ -1230,6 +1296,12 @@ bones/20/scale = Vector3(1, 1, 1)
 [node name="Cube" type="MeshInstance3D" parent="Skeleton3D"]
 mesh = SubResource("ArrayMesh_1pxp0")
 skin = SubResource("Skin_837qw")
+
+[node name="jump" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_4k0wh")
+
+[node name="punch" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_wwphx")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_shape_entered" from="hand" to="." method="_on_hand_body_shape_entered"]

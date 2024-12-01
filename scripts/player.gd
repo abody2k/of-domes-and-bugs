@@ -19,6 +19,7 @@ var bug : CharacterBody3D
 func _ready():
 	bug = get_parent().get_node("bug")
 	last_click= Time.get_ticks_msec()
+	get_parent().get_node("AnimationPlayer").play("main")
 
 func handle_action(delta:float,ui_mode_en = false):
 	
@@ -58,19 +59,26 @@ func handle_action(delta:float,ui_mode_en = false):
 		var time_diff = Time.get_ticks_msec()-last_click
 
 		if time_diff <= 200 :
-			if number_of_clicks >= 3:
+			if number_of_clicks >= 2:
 				number_of_clicks = 0
-				$Control/clicks.text = "0"
+				$Control/punch.visible = false
+				$Control/jump.visible = false
 			else:
 				number_of_clicks+=1
-				$Control/clicks.text = str(number_of_clicks)
+				if number_of_clicks== 1:
+					$Control/punch.visible = true
+					$Control/jump.visible = false
+				else:
+						$Control/punch.visible = false
+						$Control/jump.visible = true	
+					
 			
 			pass
 			#it is an additional click
 		else:
 			number_of_clicks = 0
-			$Control/clicks.text = "0"
-		pass
+			$Control/punch.visible = false
+			$Control/jump.visible = false
 		
 	
 		
@@ -86,6 +94,8 @@ func take_damage(damage:int ):
 	if hp <=0:
 		
 		$AnimationPlayer.play("death")
+	elif hp ==1:
+		(get_parent().get_node("AudioStreamPlayer") as AudioStreamPlayer).volume_db+=5
 		pass
 	pass
 	
@@ -151,13 +161,15 @@ func _on_animation_player_animation_finished(anim_name):
 			playerMode = PLAYER_MODES.IDLE
 			is_handling_input= true
 			number_of_clicks=0
-			$Control/clicks.text = "0"
+			$Control/punch.visible = false
+			$Control/jump.visible = false
 		"jump":
 			$AnimationPlayer.play("idle")
 			playerMode = PLAYER_MODES.IDLE
 			is_handling_input= true
 			number_of_clicks=0
-			$Control/clicks.text = "0"
+			$Control/punch.visible = false
+			$Control/jump.visible = false
 		"death":
 			ui_mode= true
 			$CanvasLayer.visible = true

@@ -1,10 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://c75wiero8a5qq"]
+[gd_scene load_steps=11 format=3 uid="uid://c75wiero8a5qq"]
 
 [ext_resource type="PackedScene" uid="uid://bx6wqqvsfo1je" path="res://scenes/player.tscn" id="1_0cv8p"]
 [ext_resource type="PackedScene" uid="uid://blml7xwl6a6h3" path="res://scenes/arena.tscn" id="2_885j2"]
 [ext_resource type="PackedScene" uid="uid://dgoxg3gxovybq" path="res://scenes/bug.tscn" id="3_rquvb"]
+[ext_resource type="AudioStream" uid="uid://bq6lwymmlykbn" path="res://audio/crowd-cheering-198411.wav" id="4_rbshi"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_rnfte"]
+turbidity = 331.84
+sun_disk_scale = 149.97
+ground_color = Color(0.731127, 0.606013, 0.458007, 1)
+
+[sub_resource type="Sky" id="Sky_kcn64"]
+sky_material = SubResource("PhysicalSkyMaterial_rnfte")
 
 [sub_resource type="Environment" id="Environment_arcme"]
+background_mode = 2
+sky = SubResource("Sky_kcn64")
 
 [sub_resource type="Animation" id="Animation_0u2k8"]
 length = 0.001
@@ -125,3 +136,8 @@ libraries = {
 }
 
 [node name="bug" parent="." instance=ExtResource("3_rquvb")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rbshi")
+volume_db = -12.18
+autoplay = true

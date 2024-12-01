@@ -19,6 +19,8 @@ func got_attacked():
 		$AnimationPlayer.play("death")
 		$Timer.stop()
 		set_physics_process(false)
+	elif hp ==1:
+		(get_parent().get_node("AudioStreamPlayer") as AudioStreamPlayer).volume_db+=5
 		
 	return
 
@@ -49,6 +51,7 @@ func attack():
 	if randf() > .5 :
 		print("avoiding success")
 		state = STATES.AVOIDING
+		$wing.play()
 		$AnimationPlayer.play("avoid")
 	pass
 	
