@@ -96,6 +96,7 @@ func handle_action(delta:float,ui_mode_en = false):
 			
 func take_damage(damage:int ):
 	hp-=damage
+	get_parent().get_node("CanvasLayer/Control/player").value = hp
 	if hp <=0:
 		
 		$AnimationPlayer.play("death")

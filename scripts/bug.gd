@@ -5,7 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var hp = 10
 var player  : CharacterBody3D
-var state : STATES = STATES.IDLE
+@export var state : STATES = STATES.IDLE
 var dead = false
 
 
@@ -14,6 +14,7 @@ func _ready():
 	$AnimationPlayer.play("idle")
 func got_attacked():
 	hp-=1
+	get_parent().get_node("CanvasLayer/Control/bug").value = hp
 	if hp <= 0:
 		dead=true
 		$AnimationPlayer.play("death")

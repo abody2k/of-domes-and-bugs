@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c75wiero8a5qq"]
+[gd_scene load_steps=13 format=3 uid="uid://c75wiero8a5qq"]
 
 [ext_resource type="PackedScene" uid="uid://bx6wqqvsfo1je" path="res://scenes/player.tscn" id="1_0cv8p"]
 [ext_resource type="PackedScene" uid="uid://blml7xwl6a6h3" path="res://scenes/arena.tscn" id="2_885j2"]
@@ -103,6 +103,12 @@ _data = {
 "main": SubResource("Animation_3ktxy")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e41ff"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m43x"]
+bg_color = Color(0.0807833, 0.0807834, 0.0807833, 1)
+
 [node name="main" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_0cv8p")]
@@ -141,3 +147,42 @@ libraries = {
 stream = ExtResource("4_rbshi")
 volume_db = -12.18
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player" type="ProgressBar" parent="CanvasLayer/Control"]
+modulate = Color(0, 0.922352, 0.078739, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.562
+anchor_right = 1.0
+anchor_bottom = 0.054
+offset_left = 0.575928
+offset_top = 49.0
+offset_bottom = 49.008
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_e41ff")
+max_value = 10.0
+value = 10.0
+
+[node name="bug" type="ProgressBar" parent="CanvasLayer/Control"]
+modulate = Color(0.972889, 0, 0.341358, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.562
+anchor_right = 1.0
+anchor_bottom = 0.054
+offset_left = 0.575928
+offset_bottom = 0.00799942
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_2m43x")
+max_value = 10.0
+value = 10.0

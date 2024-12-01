@@ -1126,6 +1126,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="punch" type="TextureRect" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.089
@@ -1136,6 +1137,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_mw8xh")
 
 [node name="jump" type="TextureRect" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.089
