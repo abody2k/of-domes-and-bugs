@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dgoxg3gxovybq"]
+[gd_scene load_steps=19 format=4 uid="uid://dgoxg3gxovybq"]
 
 [ext_resource type="Script" path="res://scripts/bug.gd" id="1_hqt15"]
 [ext_resource type="Texture2D" uid="uid://b04m4yu3tl55t" path="res://models/ofdomesandbugs_Untitled.png" id="2_etlqb"]
@@ -64,6 +64,18 @@ tracks/3/path = NodePath("Armature_001/Skeleton3D:Bone.016")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = PackedFloat32Array(0, 1, 0.136251, -0.236521, -0.678431, 0.682074)
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_7exn7"]
 length = 0.001
@@ -100,12 +112,55 @@ tracks/3/path = NodePath("Armature_001/Skeleton3D:Bone.021")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = PackedFloat32Array(0, 1, 0.0623612, -0.0355654, 0.0866291, 0.993651)
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_ovqom"]
+resource_name = "avoid"
+length = 2.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1.06667, 1, 0, 20, 0, 2, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature_001/Cube_001/Cube_002:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.433333, 0.566667, 0.733333, 0.966667, 1.16667, 1.4, 1.6, 1.76667, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.518269, 1.05494, -0.731591), Vector3(-0.529018, 2.07557, -2.41498), Vector3(-0.182776, 0.876395, -0.228466), Vector3(-0.52081, 2.08408, -2.43197), Vector3(-0.306508, 0.915023, -0.387328), Vector3(-0.51392, 2.09098, -2.44592), Vector3(-0.369574, 0.944751, -0.476869), Vector3(-0.612295, 1.96478, -2.21057), Vector3(-0.0632987, 0.858944, -0.0867625), Vector3(-0.667602, 1.84656, -2.01309), Vector3(-0.0628538, 0.858912, -0.0862462)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x7sqt"]
 _data = {
 "RESET": SubResource("Animation_7exn7"),
 "attack_below": SubResource("Animation_33he6"),
 "attack_top": SubResource("Animation_nc20j"),
+"avoid": SubResource("Animation_ovqom"),
 "idle": SubResource("Animation_m0lyv")
 }
 
@@ -476,5 +531,6 @@ shape = SubResource("CapsuleShape3D_rcbbd")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_shape_entered" from="attackingZone" to="." method="_on_attacking_zone_body_shape_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

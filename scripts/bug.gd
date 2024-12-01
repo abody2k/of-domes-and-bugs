@@ -20,7 +20,6 @@ func got_attacked():
 func _physics_process(_delta):
 	look_at(Vector3(player.global_position.x,global_position.y,player.global_position.z))
 	
-	$AnimationPlayer.play("idle")
 	pass
 
 
@@ -39,16 +38,32 @@ func player_about_to_attack():
 	
 
 func attack():
+	print("trying")
+	if randf() > .5 :
+		print("success")
+		state = STATES.AVOIDING
+		$AnimationPlayer.play("avoid")
 	pass
 	
 	
 	
 func _on_timer_timeout():
 	#The bug either stays idle or it attacks depending on a random value
-	if randf() > .5 :
-		
+	if randf() > .5 and state != STATES.AVOIDING :# we can alter this later to provide an attack while jumping
+		$AnimationPlayer.play("attack_below")
 		pass #ATTACK
 	else:
+		state = STATES.IDLE
 		#DO NOTHING
 		pass
 	pass # Replace with function body.
+
+
+func _on_animation_player_animation_finished(anim_name):
+	match anim_name:
+		"attack_below":
+			state = STATES.IDLE
+			$AnimationPlayer.play("idle")
+		"avoid":
+			state = STATES.IDLE
+			$AnimationPlayer.play("idle")

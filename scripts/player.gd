@@ -95,9 +95,10 @@ func handle_clicks():
 	is_handling_input = false
 	match number_of_clicks:
 		1:
+			
 			playerMode= PLAYER_MODES.ATTACKING
 			$AnimationPlayer.play("punch")
-			
+			bug.call("attack")
 			pass
 	pass
 	
