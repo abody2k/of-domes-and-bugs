@@ -20,6 +20,7 @@ func _ready():
 	bug = get_parent().get_node("bug")
 	last_click= Time.get_ticks_msec()
 	get_parent().get_node("AnimationPlayer").play("main")
+	$AnimationPlayer.play("idle")
 
 func handle_action(delta:float,ui_mode_en = false):
 	
@@ -63,14 +64,17 @@ func handle_action(delta:float,ui_mode_en = false):
 				number_of_clicks = 0
 				$Control/punch.visible = false
 				$Control/jump.visible = false
+				$AudioStreamPlayer.play()
 			else:
 				number_of_clicks+=1
 				if number_of_clicks== 1:
 					$Control/punch.visible = true
 					$Control/jump.visible = false
+					$AudioStreamPlayer.play()
 				else:
 						$Control/punch.visible = false
 						$Control/jump.visible = true	
+						$AudioStreamPlayer.play()
 					
 			
 			pass
@@ -79,6 +83,7 @@ func handle_action(delta:float,ui_mode_en = false):
 			number_of_clicks = 0
 			$Control/punch.visible = false
 			$Control/jump.visible = false
+			$AudioStreamPlayer.play()
 		
 	
 		
@@ -163,6 +168,7 @@ func _on_animation_player_animation_finished(anim_name):
 			number_of_clicks=0
 			$Control/punch.visible = false
 			$Control/jump.visible = false
+			$AudioStreamPlayer.play()
 		"jump":
 			$AnimationPlayer.play("idle")
 			playerMode = PLAYER_MODES.IDLE
@@ -170,6 +176,7 @@ func _on_animation_player_animation_finished(anim_name):
 			number_of_clicks=0
 			$Control/punch.visible = false
 			$Control/jump.visible = false
+			$AudioStreamPlayer.play()
 		"death":
 			ui_mode= true
 			$CanvasLayer.visible = true
