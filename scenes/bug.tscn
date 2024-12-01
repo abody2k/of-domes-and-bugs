@@ -473,4 +473,8 @@ skin = SubResource("Skin_a6m5a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.203, 0)
 shape = SubResource("CapsuleShape3D_rcbbd")
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_shape_entered" from="attackingZone" to="." method="_on_attacking_zone_body_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
