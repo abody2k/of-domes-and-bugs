@@ -119,19 +119,10 @@ func _physics_process(delta):
 
 
 func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
-	print(body)
+	
 	if playerMode == PLAYER_MODES.ATTACKING:
+		print( "direct hit")
 		body.call("got_attacked")
-		#call a function in that body that will play certain animation
-		#reduce hp
-		#stop the animation of this player
-		$AnimationPlayer.play("idle")
-		playerMode = PLAYER_MODES.IDLE
-		is_handling_input= true
-		number_of_clicks=0
-		$Control/clicks.text = "0"
-		pass
-	pass # Replace with function body.
 
 
 func _on_animation_player_animation_finished(anim_name):

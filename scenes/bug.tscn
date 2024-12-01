@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://scripts/bug.gd" id="1_hqt15"]
 [ext_resource type="Texture2D" uid="uid://b04m4yu3tl55t" path="res://models/ofdomesandbugs_Untitled.png" id="2_etlqb"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8m3ec"]
-radius = 6.23365
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a6q1w"]
+height = 24.3501
+radius = 5.94433
 
 [sub_resource type="Animation" id="Animation_33he6"]
 resource_name = "attack_below"
@@ -278,11 +279,8 @@ collision_mask = 2
 script = ExtResource("1_hqt15")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_8m3ec")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.35988, 0)
-shape = SubResource("SphereShape3D_8m3ec")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.85145, 0)
+shape = SubResource("CylinderShape3D_a6q1w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
