@@ -24,6 +24,18 @@ tracks/1/path = NodePath("Armature_001/Skeleton3D:Bone.021")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.0945703, -0.397826, 0.557677, 0.722348)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("attackingZone/CollisionShape3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.266667, 0.366667, 0.5, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(7.67248, 0, -7.69553), Vector3(15.4972, 0, -3.53721), Vector3(15.845, 3.40182, -2.08257), Vector3(16.8884, 5.31017, 2.28136), Vector3(14.4749, 9.12685, 5.90931), Vector3(15.8328, 9.84593, 4.02572), Vector3(16.5118, 8.38011, 0.221411), Vector3(16.5118, 9.70764, -4.19824), Vector3(16.5118, 9.20982, -8.54103), Vector3(12.1721, 8.79496, -10.7893), Vector3(8.77346, 8.04822, -11.9919), Vector3(0.0939865, 6.13988, -11.9919)]
+}
 
 [sub_resource type="Animation" id="Animation_nc20j"]
 resource_name = "attack_top"
@@ -75,6 +87,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("attackingZone/CollisionShape3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(6.92544, -4.39748, 1.69836)]
 }
 
 [sub_resource type="Animation" id="Animation_7exn7"]
@@ -131,6 +155,18 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("attackingZone/CollisionShape3D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(14.4749, 0, 5.90931)]
+}
 
 [sub_resource type="Animation" id="Animation_ovqom"]
 resource_name = "avoid"
@@ -165,6 +201,7 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sbdr0"]
+radius = 3.08842
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqt2i"]
 resource_name = "Material.005"
@@ -346,6 +383,7 @@ libraries = {
 collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="attackingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4749, 0, 5.90931)
 shape = SubResource("SphereShape3D_sbdr0")
 
 [node name="Armature_001" type="Node3D" parent="."]

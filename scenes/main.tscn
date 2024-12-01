@@ -95,7 +95,7 @@ _data = {
 [node name="main" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_0cv8p")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.24132, 0, 2.00505)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.24132, 0, -6.78233)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.838185, 0.545385, 0, -0.545385, 0.838185, 37.86, 40.991, 57.314)
