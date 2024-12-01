@@ -155,6 +155,18 @@ tracks/20/path = NodePath("Skeleton3D:Bone.010.R")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647)
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("hand/CollisionShape3D:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.78911, 6.58986, -3.89341)]
+}
 
 [sub_resource type="Animation" id="Animation_1at04"]
 resource_name = "death"
@@ -459,6 +471,18 @@ tracks/20/path = NodePath("Skeleton3D:Bone.010.R")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 0.5, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 1, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647)
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("hand/CollisionShape3D:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.466667, 0.5, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.898419, 1.46376, -0.89341), Vector3(4.78911, 6.58986, -3.89341), Vector3(3.279, 8.96933, -0.89341), Vector3(2.77563, 9.76249, -0.89341), Vector3(4.38528, 2.98995, -0.89341)]
+}
 
 [sub_resource type="Animation" id="Animation_hg1o3"]
 resource_name = "jump"
@@ -612,6 +636,18 @@ tracks/20/path = NodePath("Skeleton3D:Bone.010.R")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 0.5, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 1, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647)
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("hand/CollisionShape3D:rotation")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_a7c3r"]
 resource_name = "punch"
@@ -762,6 +798,18 @@ tracks/20/path = NodePath("Skeleton3D:Bone.010.R")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 0.5, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 1, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647)
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("hand/CollisionShape3D:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.733333, 0.766667, 0.866667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.83332, 2.43706, 0.920799), Vector3(3.8734, 10.2748, 5.42813), Vector3(1.92391, 6.30588, -4.92069), Vector3(-0.139012, 5.73888, -5.60601), Vector3(-6.92971, 5.73888, -3.75964), Vector3(-9.2036, 5.73888, 4.06577)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxra7"]
 _data = {
@@ -928,12 +976,12 @@ libraries = {
 }
 
 [node name="hand" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.88981, 5.93612, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3166, -1.71046, -3.4507)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04011, 0, -3.89341)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78911, 6.58986, -3.89341)
 shape = SubResource("SphereShape3D_1u6xs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

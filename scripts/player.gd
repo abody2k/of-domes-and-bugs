@@ -11,12 +11,13 @@ var last_click = 0
 var number_of_clicks = 0 
 var start_clicking_time = 0
 var playerMode : PLAYER_MODES = PLAYER_MODES.IDLE
-const MOVEMENT_RADIUS : float = 20.0
+const MOVEMENT_RADIUS : float = 15.0
 var angle : float = 0.0
 
 var is_handling_input = true
-
+var bug : CharacterBody3D
 func _ready():
+	bug = get_parent().get_node("bug")
 	last_click= Time.get_ticks_msec()
 
 func handle_action(delta:float,ui_mode_en = false):
@@ -103,6 +104,7 @@ func handle_clicks():
 	
 
 func _physics_process(delta):
+	look_at(Vector3(bug.global_position.x,global_position.y,bug.global_position.z))
 	get_parent().get_node("Camera3D").look_at(global_position)
 		
 	
@@ -117,7 +119,7 @@ func _physics_process(delta):
 
 
 func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
-	
+	print(body)
 	if playerMode == PLAYER_MODES.ATTACKING:
 		body.call("got_attacked")
 		#call a function in that body that will play certain animation

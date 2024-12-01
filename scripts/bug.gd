@@ -6,12 +6,19 @@ const JUMP_VELOCITY = 4.5
 enum BUG_MODES {IDLE,ATTACKING}
 var bug_mode : BUG_MODES = BUG_MODES.IDLE
 var hp = 10
+var player  : CharacterBody3D
 
+
+func _ready():
+	player = get_parent().get_node("player")
 func got_attacked():
 	hp-=1
 	return
 
 func _physics_process(_delta):
+	look_at(Vector3(player.global_position.x,global_position.y,player.global_position.z))
+	
+	$AnimationPlayer.play("idle")
 	pass
 
 

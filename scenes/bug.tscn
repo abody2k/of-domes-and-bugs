@@ -273,6 +273,8 @@ radius = 1.42943
 height = 12.216
 
 [node name="bug" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_hqt15")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
