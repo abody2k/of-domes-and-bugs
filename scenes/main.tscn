@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c75wiero8a5qq"]
+[gd_scene load_steps=14 format=3 uid="uid://c75wiero8a5qq"]
 
 [ext_resource type="PackedScene" uid="uid://bx6wqqvsfo1je" path="res://scenes/player.tscn" id="1_0cv8p"]
 [ext_resource type="PackedScene" uid="uid://blml7xwl6a6h3" path="res://scenes/arena.tscn" id="2_885j2"]
 [ext_resource type="PackedScene" uid="uid://dgoxg3gxovybq" path="res://scenes/bug.tscn" id="3_rquvb"]
 [ext_resource type="AudioStream" uid="uid://bq6lwymmlykbn" path="res://audio/crowd-cheering-198411.wav" id="4_rbshi"]
+[ext_resource type="AudioStream" uid="uid://ptxgj0b8eokv" path="res://audio/boxing-bell-signals-6115.wav" id="5_joi50"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_rnfte"]
 turbidity = 331.84
@@ -188,5 +189,9 @@ value = 50.0
 
 [node name="playerPos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681183, 0, 14.649)
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_joi50")
+autoplay = true
 
 [connection signal="finished" from="AudioStreamPlayer" to="player" method="_on_audio_stream_player_finished"]
