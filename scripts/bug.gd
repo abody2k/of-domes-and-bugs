@@ -34,7 +34,9 @@ func _physics_process(_delta):
 	if state == STATES.IDLE and global_position.distance_squared_to(player.global_position) > 500 :
 		velocity = -basis.z * SPEED
 		move_and_slide()
-		print("moving")
+	if state == STATES.IDLE and global_position.distance_squared_to(player.global_position) < 200 :
+		velocity = basis.z * SPEED * 2
+		move_and_slide()
 	pass
 
 
@@ -43,7 +45,6 @@ func _on_attacking_zone_body_shape_entered(_body_rid, body, _body_shape_index, _
 	if state != STATES.ATTACKING:
 		return
 	else:
-		print("just attacked THE PLAYER SUCCESSFULLY")
 		body.call("take_damage",1)
 	pass # Replace with function body.
 
@@ -54,7 +55,6 @@ func player_about_to_attack():
 	
 
 func attack():
-	print("trying")
 	if randf() > .5 and global_position.distance_squared_to(player.global_position) <= 200:
 		state = STATES.AVOIDING
 		$wing.play()

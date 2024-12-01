@@ -185,6 +185,18 @@ tracks/22/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath(".:rotation")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 3.14159)]
+}
 
 [sub_resource type="Animation" id="Animation_1at04"]
 resource_name = "death"
@@ -201,7 +213,7 @@ tracks/1/enabled = true
 tracks/1/path = NodePath("Skeleton3D:Bone.001")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, -0.5, 0, 0, 0.866025, 0.5, 1, -0.707107, 0, 0, 0.707107)
 tracks/2/type = "rotation_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
@@ -229,7 +241,7 @@ tracks/5/enabled = true
 tracks/5/path = NodePath("Skeleton3D:Bone.005.L")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, -0.156785, 0.156785, -0.689506, 0.689506)
+tracks/5/keys = PackedFloat32Array(0, 1, -0.156785, 0.156785, -0.689506, 0.689506, 0.5, 1, -0.20485, 0.0848514, -0.373158, 0.900883)
 tracks/6/type = "rotation_3d"
 tracks/6/imported = false
 tracks/6/enabled = true
@@ -250,7 +262,7 @@ tracks/8/enabled = true
 tracks/8/path = NodePath("Skeleton3D:Bone.005.R")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
-tracks/8/keys = PackedFloat32Array(0, 1, -0.156785, -0.156785, 0.689506, 0.689506)
+tracks/8/keys = PackedFloat32Array(0, 1, -0.156785, -0.156785, 0.689506, 0.689506, 0.5, 1, -0.192022, -0.110864, 0.487554, 0.844469)
 tracks/9/type = "rotation_3d"
 tracks/9/imported = false
 tracks/9/enabled = true
@@ -299,7 +311,7 @@ tracks/15/enabled = true
 tracks/15/path = NodePath("Skeleton3D:Bone.008.L")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
-tracks/15/keys = PackedFloat32Array(0, 1, 0.791801, 0.610779, -7.05725e-08, 4.70483e-08)
+tracks/15/keys = PackedFloat32Array(0, 1, 0.791801, 0.610779, -7.05725e-08, 4.70483e-08, 0.5, 1, 0.559888, 0.431886, -0.431886, 0.559888)
 tracks/16/type = "rotation_3d"
 tracks/16/imported = false
 tracks/16/enabled = true
@@ -320,7 +332,7 @@ tracks/18/enabled = true
 tracks/18/path = NodePath("Skeleton3D:Bone.008.R")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
-tracks/18/keys = PackedFloat32Array(0, 1, 0.791801, -0.610779, 7.05725e-08, 4.70483e-08)
+tracks/18/keys = PackedFloat32Array(0, 1, 0.791801, -0.610779, 7.05725e-08, 4.70483e-08, 0.5, 1, 0.559888, -0.431886, 0.431886, 0.559888)
 tracks/19/type = "rotation_3d"
 tracks/19/imported = false
 tracks/19/enabled = true
@@ -335,6 +347,18 @@ tracks/20/path = NodePath("Skeleton3D:Bone.010.R")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647)
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath(".:rotation")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 3.14159)]
+}
 
 [sub_resource type="Animation" id="Animation_xcmx2"]
 resource_name = "finisher"
@@ -518,7 +542,7 @@ tracks/20/loop_wrap = true
 tracks/20/keys = PackedFloat32Array(0, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 0.5, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647, 1, 1, -9.59481e-08, 1.77588e-08, 0.400103, 0.91647)
 tracks/21/type = "value"
 tracks/21/imported = false
-tracks/21/enabled = true
+tracks/21/enabled = false
 tracks/21/path = NodePath("hand/CollisionShape3D:position")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
@@ -1060,6 +1084,7 @@ bind/20/bone = -1
 bind/20/pose = Transform3D(0.679835, -0.733365, 2.64426e-07, -0.733365, -0.679835, -1.96701e-08, 1.76204e-07, -1.90078e-07, -1, 17.9595, -37.7161, 4.65486e-06)
 
 [node name="player" type="CharacterBody3D"]
+transform = Transform3D(-1, -1.50996e-07, 0, 1.50996e-07, -1, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 3
 script = ExtResource("1_di82q")
 

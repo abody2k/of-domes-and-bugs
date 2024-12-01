@@ -112,7 +112,6 @@ bg_color = Color(0.0807833, 0.0807834, 0.0807833, 1)
 [node name="main" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_0cv8p")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.838185, 0.545385, 0, -0.545385, 0.838185, 37.86, 40.991, 57.314)
@@ -186,5 +185,8 @@ grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_2m43x")
 max_value = 50.0
 value = 50.0
+
+[node name="playerPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681183, 0, 14.649)
 
 [connection signal="finished" from="AudioStreamPlayer" to="player" method="_on_audio_stream_player_finished"]

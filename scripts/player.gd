@@ -22,6 +22,7 @@ func _ready():
 	last_click= Time.get_ticks_msec()
 	get_parent().get_node("AnimationPlayer").play("main")
 	$AnimationPlayer.play("idle")
+	global_position = get_parent().get_node("playerPos").global_position
 
 func handle_action(delta:float,ui_mode_en = false):
 	
@@ -88,12 +89,8 @@ func handle_action(delta:float,ui_mode_en = false):
 		
 	
 		
-		print( Time.get_ticks_msec() - start_clicking_time)		
 		
-		if Time.get_ticks_msec() - start_clicking_time >=200:
-			print("we have been talking and just stopped")
-		else:		
-			print("number of clicks " + str(number_of_clicks))
+	
 			
 func take_damage(damage:int ):
 	hp-=damage
@@ -138,6 +135,9 @@ func bring_player_to_ground():
 	
 func _physics_process(delta):
 	angle +=delta
+	
+	if playerMode == PLAYER_MODES.IDLE and global_position.y < 0 :
+		global_position.y=0
 	if global_position != Vector3(bug.global_position.x,global_position.y,bug.global_position.z):
 		look_at(Vector3(bug.global_position.x,global_position.y,bug.global_position.z))
 	get_parent().get_node("Camera3D").look_at(global_position)
@@ -156,7 +156,6 @@ func _physics_process(delta):
 func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	
 	if playerMode == PLAYER_MODES.ATTACKING:
-		print( "direct hit")
 		body.call("got_attacked")
 
 
@@ -181,6 +180,7 @@ func _on_animation_player_animation_finished(anim_name):
 			$Control/jump.visible = false
 			$AudioStreamPlayer.play()
 		"death":
+			collision_layer=0
 			ui_mode= true
 			$AudioStreamPlayer2.play()
 			$CanvasLayer.visible = true
