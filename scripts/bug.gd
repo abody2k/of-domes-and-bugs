@@ -23,7 +23,8 @@ func got_attacked():
 	return
 
 func _physics_process(_delta):
-	look_at(Vector3(player.global_position.x,global_position.y,player.global_position.z))
+	if global_position != Vector3(player.global_position.x,global_position.y,player.global_position.z):
+		look_at(Vector3(player.global_position.x,global_position.y,player.global_position.z))
 	
 	pass
 

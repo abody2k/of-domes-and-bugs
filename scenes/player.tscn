@@ -167,6 +167,18 @@ tracks/21/keys = {
 "update": 0,
 "values": [Vector3(4.78911, 6.58986, -3.89341)]
 }
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath(".:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_1at04"]
 resource_name = "death"
@@ -486,6 +498,33 @@ tracks/21/keys = {
 
 [sub_resource type="Animation" id="Animation_hg1o3"]
 resource_name = "jump"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 34.0326, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D:Bone.009.L")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1.17375e-07, -2.23757e-08, 0.610779, 0.791801, 0.166667, 1, 7.10533e-08, -2.76382e-08, 0.385034, 0.922902, 0.8, 1, 1.17375e-07, -2.23757e-08, 0.610779, 0.791801)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton3D:Bone.009.R")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1.17375e-07, 2.23757e-08, -0.610779, 0.791801, 0.166667, 1, 7.10533e-08, 2.76382e-08, -0.385034, 0.922902, 0.8, 1, 1.17375e-07, 2.23757e-08, -0.610779, 0.791801)
 
 [sub_resource type="Animation" id="Animation_34jbl"]
 resource_name = "moving"
@@ -964,6 +1003,7 @@ bind/20/bone = -1
 bind/20/pose = Transform3D(0.679835, -0.733365, 2.64426e-07, -0.733365, -0.679835, -1.96701e-08, 1.76204e-07, -1.90078e-07, -1, 17.9595, -37.7161, 4.65486e-06)
 
 [node name="player" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_di82q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -1155,7 +1195,7 @@ bones/16/name = "Bone.009.L"
 bones/16/parent = 15
 bones/16/rest = Transform3D(0.253898, -0.967231, 1.07946e-07, 0.967231, 0.253898, -2.13208e-07, 1.78814e-07, 1.58541e-07, 1, 0, 1.1256, 0)
 bones/16/enabled = true
-bones/16/position = Vector3(0, 1.1256, 0)
+bones/16/position = Vector3(-1.15303e-07, 1.1256, 1.91586e-14)
 bones/16/rotation = Quaternion(1.17375e-07, -2.23757e-08, 0.610779, 0.791801)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/name = "Bone.010.L"
@@ -1176,7 +1216,7 @@ bones/19/name = "Bone.009.R"
 bones/19/parent = 18
 bones/19/rest = Transform3D(0.253898, 0.967231, -1.07946e-07, -0.967231, 0.253898, -2.13208e-07, -1.78814e-07, 1.58541e-07, 1, -2.38419e-07, 1.12561, 1.42109e-13)
 bones/19/enabled = true
-bones/19/position = Vector3(-2.38419e-07, 1.12561, 1.42109e-13)
+bones/19/position = Vector3(-5.56943e-07, 1.12561, 8.7741e-14)
 bones/19/rotation = Quaternion(1.17375e-07, 2.23757e-08, -0.610779, 0.791801)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/name = "Bone.010.R"

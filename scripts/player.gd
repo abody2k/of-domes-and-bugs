@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-enum  PLAYER_MODES {ATTACKING,IDLE}
+enum  PLAYER_MODES {ATTACKING,IDLE,JUMPING}
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -58,7 +58,7 @@ func handle_action(delta:float,ui_mode_en = false):
 		var time_diff = Time.get_ticks_msec()-last_click
 
 		if time_diff <= 200 :
-			if number_of_clicks >= 2:
+			if number_of_clicks >= 3:
 				number_of_clicks = 0
 				$Control/clicks.text = "0"
 			else:
@@ -99,13 +99,29 @@ func handle_clicks():
 			playerMode= PLAYER_MODES.ATTACKING
 			$AnimationPlayer.play("punch")
 			bug.call("attack")
+		2:
+			
+			playerMode= PLAYER_MODES.JUMPING
+			var tween = get_tree().create_tween()
+			tween.finished.connect(bring_player_to_ground)
+			tween.tween_property(self,"global_position",global_position+Vector3(0,20,0),0.5)
+			
+			$AnimationPlayer.play("jump")
 			pass
 	pass
 	
 	
-
+func bring_player_to_ground():
+	var tween = get_tree().create_tween()
+	tween.tween_property(self,"global_position",global_position+Vector3(0,-20,0),0.5)
+			
+	pass
+	
+	
+	
 func _physics_process(delta):
-	look_at(Vector3(bug.global_position.x,global_position.y,bug.global_position.z))
+	if global_position != Vector3(bug.global_position.x,global_position.y,bug.global_position.z):
+		look_at(Vector3(bug.global_position.x,global_position.y,bug.global_position.z))
 	get_parent().get_node("Camera3D").look_at(global_position)
 		
 	
@@ -131,6 +147,12 @@ func _on_animation_player_animation_finished(anim_name):
 		"moving":
 			$AnimationPlayer.play("idle")
 		"punch":
+			$AnimationPlayer.play("idle")
+			playerMode = PLAYER_MODES.IDLE
+			is_handling_input= true
+			number_of_clicks=0
+			$Control/clicks.text = "0"
+		"jump":
 			$AnimationPlayer.play("idle")
 			playerMode = PLAYER_MODES.IDLE
 			is_handling_input= true
