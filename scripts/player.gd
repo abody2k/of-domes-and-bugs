@@ -19,7 +19,7 @@ var is_handling_input = true
 func _ready():
 	last_click= Time.get_ticks_msec()
 
-func handle_action(ui_mode_en = false):
+func handle_action(delta:float,ui_mode_en = false):
 	
 	
 	
@@ -30,7 +30,7 @@ func handle_action(ui_mode_en = false):
 		
 	if Input.is_action_pressed("action"):
 		if Time.get_ticks_msec() - start_clicking_time >= 200 and number_of_clicks > 0:
-			print("making a kick of a power of " + str(number_of_clicks))
+
 			if ui_mode_en:
 				match number_of_clicks:
 					1:
@@ -39,28 +39,23 @@ func handle_action(ui_mode_en = false):
 						_on_exit_button_down()
 			else:
 				handle_clicks()
-			#stop handing this process
-			#activate the move
-			#play the animation and all
-			#reset the number of clicks
-			#resume the process again
 		elif Time.get_ticks_msec() - start_clicking_time >= 200:
 			if ui_mode_en:
 				return
 			
-
+			angle +=delta
 			velocity=  Vector3(cos((angle))* MOVEMENT_RADIUS,0,sin((angle))*MOVEMENT_RADIUS)
-			#print(global_position)
+
 			move_and_slide()
 			$AnimationPlayer.play("moving")
-			#start moving in a circle 
+
 			pass
 		
 
 		
 	if Input.is_action_just_released("action"):
 		var time_diff = Time.get_ticks_msec()-last_click
-		print(time_diff)
+
 		if time_diff <= 200 :
 			if number_of_clicks >= 2:
 				number_of_clicks = 0
@@ -109,16 +104,16 @@ func handle_clicks():
 
 func _physics_process(delta):
 	get_parent().get_node("Camera3D").look_at(global_position)
-	angle +=delta
+		
 	
 	
 	if ui_mode:
-		handle_action(true)
+		handle_action(delta,true)
 		
 		return
 		
 	if is_handling_input:
-		handle_action()
+		handle_action(delta)
 
 
 func _on_hand_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):

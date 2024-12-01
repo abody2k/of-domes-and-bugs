@@ -6,14 +6,14 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_qx43m"]
 
-[sub_resource type="Animation" id="Animation_m0lyv"]
-resource_name = "idle"
-
 [sub_resource type="Animation" id="Animation_33he6"]
 resource_name = "attack_below"
 
 [sub_resource type="Animation" id="Animation_nc20j"]
 resource_name = "attack_top"
+
+[sub_resource type="Animation" id="Animation_m0lyv"]
+resource_name = "idle"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x7sqt"]
 _data = {
